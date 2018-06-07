@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>Angular</title>
+  <script src="scripts/angular.min.js"></script>
+  <script src="modules/invoice1.js"></script>
+
+</head>
+
+<body  ng-app="invoice1">
+  <div ng-controller="InvoiceCtrl as invoice">
+   <b>Invoice:</b>
+   <div>
+     quantity: <input type="number" min="0" ng-model="invoice.qty" required/>
+     <br/>
+     Costs: <input type="number" min="0" ng-model="invoice.cost" required />
+     <br/>
+     <select ng-model="invoice.inCurr">
+<option ng-repeat="curr in invoice.currencies">{{curr}}</option>
+     </select>
+   </div>
+
+   <div>
+    <b>Total:</b>
+    <span ng-repeat="curr in invoice.currencies">
+      {{invoice.total(curr) | currency:curr}}
+    </span><br>
+    <button class="btn" ng-click="invoice.pay()">Pay</button>
+  </div>
+  </div>
+</body>
+
+</html>
